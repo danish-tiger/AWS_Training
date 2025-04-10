@@ -91,11 +91,11 @@ jobs:
     - name: Set up Miniforge
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-variant: Mambaforge
-        miniforge-version: "22.9.0-2"
+        miniforge-variant: Miniforge3
+        miniforge-version: latest
         use-mamba: true
         activate-environment: housing_predictor
-        auto-update-conda: true
+        environment-file: env.yml
         python-version: "3.8"
     - name: Install package
       run: pip install dist/*.whl
