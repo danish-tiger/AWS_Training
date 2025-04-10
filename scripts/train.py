@@ -1,10 +1,13 @@
 import argparse
 import os
 import pickle
+
 import pandas as pd
+
 from housing_predictor.data.ingestion import prepare_data
 from housing_predictor.models.training import prepare_features, train_model
 from housing_predictor.utils.logging_config import configure_logging
+
 
 def main():
     parser = argparse.ArgumentParser(description="Train housing price prediction model")
@@ -66,6 +69,7 @@ def main():
         pickle.dump(model, f)
 
     print(f"Model saved to {model_path}")
+
 
 if __name__ == "__main__":
     main()

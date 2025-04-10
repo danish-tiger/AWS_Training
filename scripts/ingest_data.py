@@ -1,7 +1,13 @@
 import argparse
 import os
-from housing_predictor.data.ingestion import fetch_housing_data, load_housing_data, split_data
+
+from housing_predictor.data.ingestion import (
+    fetch_housing_data,
+    load_housing_data,
+    split_data,
+)
 from housing_predictor.utils.logging_config import configure_logging
+
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch and prepare housing data")
@@ -57,6 +63,7 @@ def main():
 
     print(f"Training data saved to {train_path}")
     print(f"Test data saved to {test_path}")
+
 
 if __name__ == "__main__":
     main()

@@ -1,12 +1,15 @@
 import argparse
 import os
 import pickle
+
 import pandas as pd
+from sklearn.impute import SimpleImputer
+
 from housing_predictor.data.ingestion import prepare_data
 from housing_predictor.models.scoring import prepare_test_features, score_model
 from housing_predictor.models.training import prepare_features
 from housing_predictor.utils.logging_config import configure_logging
-from sklearn.impute import SimpleImputer
+
 
 def main():
     parser = argparse.ArgumentParser(description="Score housing price prediction model")
@@ -66,7 +69,9 @@ def main():
     test_data_prepared = prepare_data(test_data)
 
     # Create imputer (same as used in training)
-    housing_num = test_data_prepared.drop(["median_house_value", "ocean_proximity"], axis=1, errors="ignore")
+    housing_num = test_data_prepared.drop(
+        ["median_house_value", "ocean_proximity"], axis=1, errors="ignore"
+    )
     imputer = SimpleImputer(strategy="median")
     imputer.fit(housing_num)
 
@@ -84,6 +89,7 @@ def main():
     print(f"Results saved to {results_path}")
     print(f"RMSE: {scores['rmse']}")
     print(f"MAE: {scores['mae']}")
+
 
 if __name__ == "__main__":
     main()

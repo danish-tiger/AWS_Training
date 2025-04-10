@@ -1,10 +1,11 @@
+import logging
 import os
 import tarfile
-from six.moves import urllib
-import pandas as pd
-from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
+
 import numpy as np
-import logging
+import pandas as pd
+from six.moves import urllib
+from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
 
 logger = logging.getLogger(__name__)
 
