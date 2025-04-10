@@ -23,10 +23,13 @@ jobs:
     - name: Install tree
       run: sudo apt-get install tree
     - name: Run black
+      shell: bash -l {0}
       run: black --check .
     - name: Run isort
+      shell: bash -l {0}
       run: isort --check .
     - name: Run flake8
+      shell: bash -l {0}
       run: flake8 .
 
   unit-test:
