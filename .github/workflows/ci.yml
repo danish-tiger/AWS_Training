@@ -14,8 +14,8 @@ jobs:
     - name: Set up Miniforge
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-variant: Mambaforge
-        miniforge-version: 23.3.1-0
+        miniforge-variant: Miniforge3
+        miniforge-version: latest
         use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
@@ -40,8 +40,8 @@ jobs:
     - name: Set up Miniforge
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-variant: Mambaforge
-        miniforge-version: 23.3.1-0
+        miniforge-variant: Miniforge3
+        miniforge-version: latest
         use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
@@ -60,8 +60,8 @@ jobs:
     - name: Set up Miniforge
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-variant: Mambaforge
-        miniforge-version: 23.3.1-0
+        miniforge-variant: Miniforge3
+        miniforge-version: latest
         use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
@@ -95,8 +95,8 @@ jobs:
     - name: Set up Miniforge
       uses: conda-incubator/setup-miniconda@v2
       with:
-        miniforge-variant: Mambaforge
-        miniforge-version: 23.3.1-0
+        miniforge-variant: Miniforge3
+        miniforge-version: latest
         use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
