@@ -25,4 +25,10 @@ setup(
         "scikit-learn>=1.0.0",
         "matplotlib>=3.4.0",
     ],
+    extras_require={
+        "test": [
+            "pytest>=6.0",
+            "pytest-cov>=2.0",
+        ],
+    },
 )

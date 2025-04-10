@@ -30,10 +30,11 @@ def dummy_model():
     return model
 
 @pytest.fixture
-def dummy_imputer():
+def dummy_imputer(sample_test_data):
     imputer = SimpleImputer(strategy="median")
-    # Dummy fit
-    imputer.fit(np.random.rand(10, 5))
+    # Fit with the same columns as our test data
+    test_num = sample_test_data.drop(["median_house_value", "ocean_proximity"], axis=1)
+    imputer.fit(test_num)
     return imputer
 
 def test_prepare_test_features(sample_test_data, dummy_imputer):
