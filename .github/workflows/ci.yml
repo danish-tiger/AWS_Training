@@ -1,0 +1,106 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ "assg1" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  style-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Miniforge
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
+        activate-environment: housing_predictor
+        environment-file: env.yml
+        python-version: "3.8"
+    - name: Install tree
+      run: sudo apt-get install tree
+    - name: Run black
+      run: black --check .
+    - name: Run isort
+      run: isort --check .
+    - name: Run flake8
+      run: flake8 .
+
+  unit-test:
+    needs: style-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Miniforge
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
+        activate-environment: housing_predictor
+        environment-file: env.yml
+        python-version: "3.8"
+    - name: Install package in dev mode
+      run: pip install -e .
+    - name: Run pytest
+      run: pytest -v --cov=housing_predictor
+
+  build:
+    needs: unit-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Miniforge
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
+        activate-environment: housing_predictor
+        environment-file: env.yml
+        python-version: "3.8"
+    - name: Install tree
+      run: sudo apt-get install tree
+    - name: Show directory tree before build
+      run: tree
+    - name: Build package
+      run: python setup.py sdist bdist_wheel
+    - name: Show directory tree after build
+      run: tree
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts
+        path: |
+          dist/*
+          env.yml
+
+  install:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifacts
+        path: dist/
+    - name: Set up Miniforge
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
+        activate-environment: housing_predictor
+        environment-file: env.yml
+        python-version: "3.8"
+    - name: Install package
+      run: pip install dist/*.whl
+    - name: Run scripts with logging
+      run: |
+        python scripts/ingest_data.py --output-path data/processed --log-level DEBUG
+        python scripts/train.py --input-path data/processed/housing_train.csv --output-path models --log-level DEBUG
+        python scripts/score.py --model-path models/housing_model.pkl --data-path data/processed/housing_test.csv --output-path results --log-level DEBUG
