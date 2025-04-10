@@ -55,12 +55,24 @@ def test_prepare_test_features(sample_test_data, dummy_imputer):
     assert "rooms_per_household" in features.columns
 
 
-def test_score_model(sample_test_data, dummy_model, dummy_imputer):
-    features, labels = prepare_test_features(sample_test_data, dummy_imputer)
-    scores = score_model(dummy_model, features, labels)
+def test_score_model(sample_test_data, dummy_imputer):
+    # Prepare test features (this will create 11 features)
+    test_features, test_labels = prepare_test_features(sample_test_data, dummy_imputer)
+
+    # Create a dummy model with the correct number of features
+    n_features = test_features.shape[1]
+    model = RandomForestRegressor(n_estimators=10, random_state=42)
+
+    # Train with dummy data that matches the feature dimensions
+    X_dummy = np.random.rand(10, n_features)
+    y_dummy = np.random.rand(10)
+    model.fit(X_dummy, y_dummy)
+
+    # Now scoring should work
+    scores = score_model(model, test_features, test_labels)
 
     assert isinstance(scores, dict)
     assert "rmse" in scores
     assert "mae" in scores
     assert "predictions" in scores
-    assert len(scores["predictions"]) == len(labels)
+    assert len(scores["predictions"]) == len(test_labels)

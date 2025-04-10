@@ -7,7 +7,7 @@ from sklearn.impute import SimpleImputer
 
 from housing_predictor.data.ingestion import prepare_data
 from housing_predictor.models.scoring import prepare_test_features, score_model
-from housing_predictor.models.training import prepare_features
+
 from housing_predictor.utils.logging_config import configure_logging
 
 

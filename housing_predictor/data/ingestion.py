@@ -5,7 +5,7 @@ import tarfile
 import numpy as np
 import pandas as pd
 from six.moves import urllib
-from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
 
 logger = logging.getLogger(__name__)
 

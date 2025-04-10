@@ -1,11 +1,11 @@
-import numpy as np
+
 import pandas as pd
 import pytest
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.impute import SimpleImputer
+
 from sklearn.model_selection import GridSearchCV
 
-from housing_predictor.models.training import prepare_features, train_model
+from housing_predictor.models.training import prepare_features
 
 
 @pytest.fixture
