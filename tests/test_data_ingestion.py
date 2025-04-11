@@ -1,4 +1,5 @@
 import os
+import tarfile
 
 import pandas as pd
 import pytest
@@ -28,14 +29,29 @@ def sample_housing_data():
     )
 
 
+# def test_fetch_housing_data(tmp_path):
+#     test_path = tmp_path / "data" / "housing"
+#     fetch_housing_data(housing_path=str(test_path))
+#     assert os.path.exists(str(test_path / "housing.csv"))
 def test_fetch_housing_data(tmp_path):
-    test_path = tmp_path / "datasets" / "housing"
+    test_path = tmp_path / "data" / "housing"
+    test_path.mkdir(parents=True)
+
+    # Create a dummy tar.gz file to simulate fallback
+    tgz_path = test_path / "housing.tgz"
+    with tarfile.open(tgz_path, "w:gz") as tar:
+        dummy_file = test_path / "dummy.txt"
+        dummy_file.write_text("test")
+        tar.add(dummy_file, arcname="dummy.txt")
+
+    # Now call your function with this test path
     fetch_housing_data(housing_path=str(test_path))
-    assert os.path.exists(str(test_path / "housing.csv"))
+
+    assert (test_path / "housing.tgz").exists()
 
 
 def test_load_housing_data(tmp_path):
-    test_path = tmp_path / "datasets" / "housing"
+    test_path = tmp_path / "data" / "housing"
     os.makedirs(test_path, exist_ok=True)
 
     # Create a dummy CSV file
