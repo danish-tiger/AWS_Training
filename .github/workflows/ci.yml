@@ -50,7 +50,7 @@ jobs:
       run: pip install -e .
     - name: Run pytest
       shell: bash -l {0}
-      run: pytest -v --cov=housing_predictor
+      run: pytest -v --cov=src/housing_predictor
 
   build:
     needs: unit-test
