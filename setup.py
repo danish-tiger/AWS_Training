@@ -6,13 +6,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="housing_predictor",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Danish Azam",
+    author_email="danish.azam@tigeranalytics.com",
     description="A package for predicting housing prices",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yourusername/AWS_TRAINING",
-    packages=find_packages(),
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
