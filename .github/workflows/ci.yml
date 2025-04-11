@@ -35,6 +35,9 @@ jobs:
   unit-test:
     needs: style-test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Miniforge
@@ -50,8 +53,6 @@ jobs:
       run: pip install -e .
     - name: Run pytest
       shell: bash -l {0}
-      env:
-        PYTHONPATH: src
       run: pytest -v --cov=src/housing_predictor
 
   build:
@@ -104,7 +105,7 @@ jobs:
         environment-file: env.yml
         python-version: "3.8"
     - name: Install package
-      run: pip install dist/*.whl
+      run: pip install $(find dist -name "*.whl")
     - name: Run scripts with logging
       run: |
         python scripts/ingest_data.py --output-path data/processed --log-level DEBUG
