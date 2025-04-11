@@ -49,6 +49,9 @@ jobs:
     - name: Install package in dev mode
       run: pip install -e .
     - name: Run pytest
+      shell: bash -l {0}
+      env:
+        PYTHONPATH: src
       run: pytest -v --cov=src/housing_predictor
 
   build:
