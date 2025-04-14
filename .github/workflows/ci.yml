@@ -106,6 +106,9 @@ jobs:
         python-version: "3.8"
     - name: Install package
       run: pip install $(find dist -name "*.whl")
+    - name: Install mlflow
+      run: pip install mlflow
+
     - name: Run scripts with logging
       run: |
         python -m src.housing_predictor.main
