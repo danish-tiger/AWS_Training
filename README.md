@@ -35,3 +35,10 @@ python scripts/ingest_data.py --output-path data/processed
 python scripts/train.py --input-path data/processed/housing_train.csv --output-path models
 3. Score model:
 python scripts/score.py --model-path models/housing_model.pkl --data-path data/processed/housing_test.csv --output-path results
+
+Usage of docker to test locally
+# From project root (where Dockerfile is)
+docker build -t housing-predictor .
+
+# Test the main pipeline
+docker run --rm housing-predictor
