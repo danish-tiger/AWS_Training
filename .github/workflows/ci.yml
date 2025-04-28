@@ -16,7 +16,7 @@ jobs:
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
-        use-mamba: false
+        use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
         python-version: "3.8"
@@ -45,7 +45,7 @@ jobs:
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
-        use-mamba: false
+        use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
         python-version: "3.8"
@@ -65,7 +65,7 @@ jobs:
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
-        use-mamba: false
+        use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
         python-version: "3.8"
@@ -100,7 +100,7 @@ jobs:
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
-        use-mamba: false
+        use-mamba: true
         activate-environment: housing_predictor
         environment-file: env.yml
         python-version: "3.8"
