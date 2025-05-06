@@ -17,9 +17,14 @@ jobs:
         miniforge-variant: Miniforge3
         miniforge-version: latest
         use-mamba: true
-        activate-environment: housing_predictor
-        environment-file: env.yml
         python-version: "3.8"
+        auto-activate-base: false
+
+    - name: Create conda environment
+      run: mamba env create -f env.yml -n housing_predictor
+    - name: Activate conda environment
+      shell: bash -l {0}
+      run: conda activate housing_predictor && conda info --envs
     - name: Install tree
       run: sudo apt-get install tree
     - name: Run black
