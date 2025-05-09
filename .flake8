@@ -2,4 +2,4 @@
 max-line-length = 88
 extend-ignore = E203
 exclude = .git,__pycache__,old,build,dist
-ignore = E501
+ignore = E501,E226,E225

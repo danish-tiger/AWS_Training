@@ -12,11 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Miniforge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
-        use-mamba: true
+        use-mamba: false
         activate-environment: housing_predictor
         environment-file: env.yml
         python-version: "3.8"
@@ -41,7 +41,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Miniforge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
@@ -61,7 +61,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Miniforge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest
@@ -96,7 +96,7 @@ jobs:
         name: build-artifacts
         path: dist/
     - name: Set up Miniforge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
         miniforge-version: latest

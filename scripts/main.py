@@ -17,7 +17,9 @@ def main():
 
     # Get the root directory of the project
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-
+    print("Started Pipeline at " + str(root_dir))
+    if root_dir == "/":
+        root_dir = ""
     with mlflow.start_run(run_name="Main_Execution"):
 
         # Step 1: Ingest data
