@@ -115,3 +115,19 @@ jobs:
         # python scripts/ingest_data.py --output-path data/processed --log-level DEBUG
         # python scripts/train.py --input-path data/processed/housing_train.csv --output-path models --log-level DEBUG
         # python scripts/score.py --model-path models/housing_model.pkl --data-path data/processed/housing_test.csv --output-path results --log-level DEBUG
+
+  drift-test:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install evidently
+      run: pip install evidently
+
+    - name: Run drift monitoring
+      working-directory: deploy
+      run: python monitor.py
+
+    - name: Show drift status
+      run: cat data/monitoring/drift_status.txt
